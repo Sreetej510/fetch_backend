@@ -15,9 +15,9 @@ var (
 // StoreReceipt saves a receipt and returns its generated ID.
 func StoreReceipt(receipt models.Receipt) string {
 	mu.Lock()
-	defer mu.Unlock()
 	id := GenerateReceiptID()
 	receiptMap[id] = receipt
+	defer mu.Unlock()
 	return id
 }
 
@@ -31,7 +31,5 @@ func GetReceipt(id string) (models.Receipt, bool) {
 
 // GenerateReceiptID returns a unique string ID.
 func GenerateReceiptID() string {
-	mu.Lock()
-	defer mu.Unlock()
 	return strconv.FormatInt(time.Now().UnixNano(), 10)
 }

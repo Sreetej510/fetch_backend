@@ -21,7 +21,6 @@ func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 
 	// Generate ID & store receipt
 	receiptID := storage.StoreReceipt(receipt)
-
 	// Respond with receipt ID
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]string{"id": receiptID})
